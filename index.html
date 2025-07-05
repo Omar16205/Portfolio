@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omar's Personal Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Omar Eyad</a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        
+        <div class="hero-content">
+            <h1>Hi I'm Omar</h1>
+            <div class="alternating-text">
+                <span class="typewriter-text" id="typewriter"></span>
+                <span class="cursor"></span>
+            </div>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">
+                    View My Work
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title fade-in">About Me</h2>
+        <div class="about-content fade-in">
+            <div class="about-text">
+                <p>Hi i'm Omar, software engineering student with a deep interest in data science and web development. I love creating digital experiences that combine functionality with beautiful design, and I'm always eager to learn new technologies and solve complex problems.</p>
+                <p>I'm interested in solving real problems through code, especially where data and design come together to create something useful.</p>
+                <div class="skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">Wordpress</span>
+                    <span class="skill-tag">Machine Learning</span>
+                    <span class="skill-tag">Data Analysis</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">postgreSQL</span>
+                </div>
+            </div>
+            <div class="about-image">
+                <div class="profile-card">
+                    <div class="profile-img">
+                        <img src="pfp-img.jpeg" alt="Omar Eyad">
+                    </div>
+                    <p>Student & Developer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="section-title fade-in">Featured Projects</h2>
+        <div class="projects-grid fade-in">
+            <div class="project-card">
+                <h3 class="project-title">Inventory Management System</h3>
+                <p class="project-description">A desktop application for managing inventory items with user authentication, role-based access control, and reporting capabilities.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">SQLite</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Omar16205/Inventory-Management-System-" class="project-link">GitHub →</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <h3 class="project-title">Photography Portfolio Website</h3>
+                <p class="project-description">Collection of moments captured through my lens, each photo reflecting a story.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Omar16205/Photography-Portfolio-Website" class="project-link">GitHub →</a>
+                    <a href="https://omar16205.github.io/Photography-Portfolio-Website/index.html" class="project-link">website link →</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <h3 class="project-title">Stroke Risk Prediction App</h3>
+                <p class="project-description">An application using advanced machine learning combined with evidence-based medical guidelines to predict stroke risk based on patient health information and lifestyle factors.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Jupyter notebook</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Machine Learning</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Omar16205/Stroke-Risk-Prediction-App" class="project-link">GitHub →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="section-title fade-in">Contact Me</h2>
+        <div class="contact-content fade-in">
+            <div class="contact-info">
+                <h3>Connect</h3>
+                <p>Feel free to contact me for any projects or job opportunities.</p>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <h4><a href="mailto:omarkh2@hotmail.com" target="_blank" style="color:white; text-decoration: none;">Email</a></h4>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div>
+                        <h4><a href="https://www.linkedin.com/in/omar-eyad-207229312/" target="_blank" style="color:white; text-decoration: none;">LinkedIn</a></h4>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <div>
+                        <h4>Location</h4>
+                        <p>Erbil, Iraq</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
