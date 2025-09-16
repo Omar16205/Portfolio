@@ -388,12 +388,22 @@ nav.scrolled {
     object-position: center top;
 }
 
-/* Projects Section */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+/* Projects Section - Slider */
+.projects-section {
+    position: relative;
+}
+
+.projects-slider {
+    position: relative;
+    overflow: hidden;
+    margin: 2rem 0;
+}
+
+.projects-container {
+    display: flex;
+    transition: transform 0.5s ease;
     gap: 2rem;
-    margin-top: 2rem;
+    padding: 1rem 0;
 }
 
 .project-card {
@@ -405,6 +415,8 @@ nav.scrolled {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    flex: 0 0 350px;
+    min-height: 400px;
 }
 
 .project-card:hover {
@@ -464,6 +476,64 @@ nav.scrolled {
 .project-link:hover {
     color: var(--accent-purple);
     transform: translateX(5px);
+}
+
+/* Slider Navigation */
+.slider-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.slider-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--accent-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-size: 1.2rem;
+    user-select: none;
+}
+
+.slider-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+    background: var(--accent-color);
+    color: var(--primary-bg);
+}
+
+.slider-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.slider-dots {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--glass-border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: var(--accent-color);
+    transform: scale(1.2);
 }
 
 /* Contact Section */
@@ -573,12 +643,14 @@ nav.scrolled {
         grid-template-columns: 1fr;
     }
 
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
     .section {
         padding: 3rem 1rem;
+    }
+
+    .project-card {
+        flex: 0 0 300px;
+        min-height: 350px;
+        padding: 1.5rem;
     }
 
     .contact-info {
@@ -589,5 +661,27 @@ nav.scrolled {
         flex-direction: column;
         text-align: center;
         gap: 0.5rem;
+    }
+
+    /* Hide slider buttons on mobile - swipe only */
+    .slider-btn {
+        display: none;
+    }
+
+    /* Keep only dots for mobile navigation */
+    .slider-nav {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-card {
+        flex: 0 0 280px;
+        padding: 1rem;
+    }
+
+    /* Ensure buttons stay hidden on smaller mobile screens */
+    .slider-btn {
+        display: none;
     }
 }
