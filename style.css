@@ -651,6 +651,13 @@ nav.scrolled {
         flex: 0 0 300px;
         min-height: 350px;
         padding: 1.5rem;
+        /* Disable 3D effects on mobile for better touch performance */
+        transform: none !important;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px) !important;
     }
 
     .contact-info {
@@ -672,12 +679,24 @@ nav.scrolled {
     .slider-nav {
         justify-content: center;
     }
+
+    /* Improve touch scrolling */
+    .projects-container {
+        cursor: grab;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 @media (max-width: 480px) {
     .project-card {
         flex: 0 0 280px;
         padding: 1rem;
+        /* Ensure 3D effects stay disabled */
+        transform: none !important;
+    }
+
+    .project-card:hover {
+        transform: translateY(-3px) !important;
     }
 
     /* Ensure buttons stay hidden on smaller mobile screens */
