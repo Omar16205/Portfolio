@@ -59,8 +59,10 @@
                     <span class="skill-tag">Data Analysis</span>
                     <span class="skill-tag">MySQL</span>
                     <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Springboot</span>
                     <span class="skill-tag">C++</span>
                     <span class="skill-tag">postgreSQL</span>
+                    <span class="skill-tag">Web App development</span>
                 </div>
             </div>
             <div class="about-image">
@@ -74,47 +76,70 @@
         </div>
     </section>
 
-    <section id="projects" class="section">
+    <section id="projects" class="section projects-section">
         <h2 class="section-title fade-in">Featured Projects</h2>
-        <div class="projects-grid fade-in">
-            <div class="project-card">
-                <h3 class="project-title">Inventory Management System</h3>
-                <p class="project-description">A desktop application for managing inventory items with user authentication, role-based access control, and reporting capabilities.</p>
-                <div class="project-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">SQLite</span>
+        <div class="projects-slider fade-in">
+            <div class="projects-container" id="projectsContainer">
+                <div class="project-card">
+                    <h3 class="project-title">Inventory Management System</h3>
+                    <p class="project-description">A desktop application for managing inventory items with user authentication, role-based access control, and reporting capabilities.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SQLite</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Omar16205/Inventory-Management-System-" class="project-link">GitHub →</a>
+                    </div>
                 </div>
-                <div class="project-links">
-                    <a href="https://github.com/Omar16205/Inventory-Management-System-" class="project-link">GitHub →</a>
+                
+                <div class="project-card">
+                    <h3 class="project-title">Photography Portfolio Website</h3>
+                    <p class="project-description">Collection of moments captured through my lens, each photo reflecting a story.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Omar16205/Photography-Portfolio-Website" class="project-link">GitHub →</a>
+                        <a href="https://omar16205.github.io/Photography-Portfolio-Website/index.html" class="project-link">website link →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="project-title">Stroke Risk Prediction App</h3>
+                    <p class="project-description">An application using advanced machine learning combined with evidence-based medical guidelines to predict stroke risk based on patient health information and lifestyle factors.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Jupyter notebook</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Machine Learning</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Omar16205/Stroke-Risk-Prediction-App" class="project-link">GitHub →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Restaurant POS System</h3>
+                    <p class="project-description">A complete restaurant POS system for managing orders, payments, and reservations.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Springboot</span>
+                        <span class="tech-tag">Thymeleaf</span>
+                        <span class="tech-tag">Bootstrap CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Omar16205/restaurant-pos" class="project-link">GitHub →</a>
+                    </div>
                 </div>
             </div>
-            
-            <div class="project-card">
-                <h3 class="project-title">Photography Portfolio Website</h3>
-                <p class="project-description">Collection of moments captured through my lens, each photo reflecting a story.</p>
-                <div class="project-tech">
-                    <span class="tech-tag">HTML</span>
-                    <span class="tech-tag">CSS</span>
-                    <span class="tech-tag">JavaScript</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/Omar16205/Photography-Portfolio-Website" class="project-link">GitHub →</a>
-                    <a href="https://omar16205.github.io/Photography-Portfolio-Website/index.html" class="project-link">website link →</a>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <h3 class="project-title">Stroke Risk Prediction App</h3>
-                <p class="project-description">An application using advanced machine learning combined with evidence-based medical guidelines to predict stroke risk based on patient health information and lifestyle factors.</p>
-                <div class="project-tech">
-                    <span class="tech-tag">Jupyter notebook</span>
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Machine Learning</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/Omar16205/Stroke-Risk-Prediction-App" class="project-link">GitHub →</a>
-                </div>
-            </div>
+        </div>
+        
+        <div class="slider-nav">
+            <div class="slider-btn" id="prevBtn">‹</div>
+            <div class="slider-dots" id="sliderDots"></div>
+            <div class="slider-btn" id="nextBtn">›</div>
         </div>
     </section>
 
@@ -122,25 +147,37 @@
         <h2 class="section-title fade-in">Contact Me</h2>
         <div class="contact-content fade-in">
             <div class="contact-info">
-                <h3>Connect</h3>
+                <h3>Contact</h3>
                 <p>Feel free to contact me for any projects or job opportunities.</p>
                 
                 <div class="contact-item">
-                    <div class="contact-icon">📧</div>
+                    <div class="contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </div>
                     <div>
                         <h4><a href="mailto:omarkh2@hotmail.com" target="_blank" style="color:white; text-decoration: none;">Email</a></h4>
                     </div>
                 </div>
                 
                 <div class="contact-item">
-                    <div class="contact-icon">💼</div>
+                    <div class="contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
+                        </svg>
+                    </div>
                     <div>
                         <h4><a href="https://www.linkedin.com/in/omar-eyad-207229312/" target="_blank" style="color:white; text-decoration: none;">LinkedIn</a></h4>
                     </div>
                 </div>
                 
                 <div class="contact-item">
-                    <div class="contact-icon">🌐</div>
+                    <div class="contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
                     <div>
                         <h4>Location</h4>
                         <p>Erbil, Iraq</p>
