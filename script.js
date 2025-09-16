@@ -62,6 +62,161 @@ document.querySelectorAll('.fade-in').forEach(el => {
     observer.observe(el);
 });
 
+// Project Slider functionality
+class ProjectSlider {
+    constructor() {
+        this.container = document.getElementById('projectsContainer');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        this.dotsContainer = document.getElementById('sliderDots');
+        this.cards = document.querySelectorAll('.project-card');
+        
+        this.currentIndex = 0;
+        this.cardsToShow = this.getCardsToShow();
+        this.maxIndex = Math.max(0, this.cards.length - this.cardsToShow);
+        
+        this.init();
+        this.setupEventListeners();
+        this.updateButtons();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            this.cardsToShow = this.getCardsToShow();
+            this.maxIndex = Math.max(0, this.cards.length - this.cardsToShow);
+            this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
+            this.updateSlider();
+        });
+    }
+    
+    getCardsToShow() {
+        if (window.innerWidth >= 1200) return 3;
+        if (window.innerWidth >= 768) return 2;
+        return 1;
+    }
+    
+    init() {
+        // Create dots
+        for (let i = 0; i <= this.maxIndex; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => this.goToSlide(i));
+            this.dotsContainer.appendChild(dot);
+        }
+    }
+    
+    setupEventListeners() {
+        this.prevBtn.addEventListener('click', () => this.prevSlide());
+        this.nextBtn.addEventListener('click', () => this.nextSlide());
+        
+        // Touch/swipe support
+        let startX = 0;
+        let endX = 0;
+        
+        this.container.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+        
+        this.container.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        });
+        
+        this.container.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            this.handleSwipe(startX, endX);
+        });
+        
+        // Mouse drag support
+        let isDragging = false;
+        let dragStartX = 0;
+        
+        this.container.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            dragStartX = e.clientX;
+            this.container.style.cursor = 'grabbing';
+        });
+        
+        this.container.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        });
+        
+        this.container.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            this.container.style.cursor = 'grab';
+            this.handleSwipe(dragStartX, e.clientX);
+        });
+        
+        this.container.addEventListener('mouseleave', () => {
+            isDragging = false;
+            this.container.style.cursor = 'grab';
+        });
+    }
+    
+    handleSwipe(startX, endX) {
+        const threshold = 50;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > threshold) {
+            if (diff > 0) {
+                this.nextSlide();
+            } else {
+                this.prevSlide();
+            }
+        }
+    }
+    
+    prevSlide() {
+        if (this.currentIndex > 0) {
+            this.currentIndex--;
+            this.updateSlider();
+        }
+    }
+    
+    nextSlide() {
+        if (this.currentIndex < this.maxIndex) {
+            this.currentIndex++;
+            this.updateSlider();
+        }
+    }
+    
+    goToSlide(index) {
+        this.currentIndex = index;
+        this.updateSlider();
+    }
+    
+    updateSlider() {
+        const cardWidth = this.cards[0].offsetWidth + 32; // card width + gap
+        const translateX = -this.currentIndex * cardWidth;
+        
+        this.container.style.transform = `translateX(${translateX}px)`;
+        
+        this.updateButtons();
+        this.updateDots();
+    }
+    
+    updateButtons() {
+        this.prevBtn.style.opacity = this.currentIndex === 0 ? '0.5' : '1';
+        this.nextBtn.style.opacity = this.currentIndex === this.maxIndex ? '0.5' : '1';
+        
+        this.prevBtn.style.pointerEvents = this.currentIndex === 0 ? 'none' : 'auto';
+        this.nextBtn.style.pointerEvents = this.currentIndex === this.maxIndex ? 'none' : 'auto';
+    }
+    
+    updateDots() {
+        const dots = this.dotsContainer.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === this.currentIndex);
+        });
+    }
+}
+
+// Initialize slider when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new ProjectSlider();
+});
+
 // Skill tags hover animation
 document.querySelectorAll('.skill-tag').forEach(tag => {
     tag.addEventListener('mouseenter', function() {
@@ -122,89 +277,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Add loading animation
-window.addEventListener('load', () => {
-    const loader = document.createElement('div');
-    loader.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--primary-bg);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-        transition: opacity 0.5s ease;
-    `;
-    
-    const spinner = document.createElement('div');
-    spinner.style.cssText = `
-        width: 50px;
-        height: 50px;
-        border: 3px solid var(--glass-border);
-        border-top: 3px solid var(--accent-color);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-    `;
-    
-    const spinKeyframes = document.createElement('style');
-    spinKeyframes.textContent = `
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    `;
-    document.head.appendChild(spinKeyframes);
-    
-    loader.appendChild(spinner);
-    document.body.appendChild(loader);
-    
-    setTimeout(() => {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.remove();
-        }, 500);
-    }, 1500);
-});
-
-// Add random floating particles
-function createParticle() {
-    const particle = document.createElement('div');
-    particle.style.cssText = `
-        position: fixed;
-        width: 4px;
-        height: 4px;
-        background: var(--accent-color);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 1;
-        opacity: 0.7;
-    `;
-    
-    particle.style.left = Math.random() * window.innerWidth + 'px';
-    particle.style.top = window.innerHeight + 'px';
-    
-    document.body.appendChild(particle);
-    
-    const duration = Math.random() * 3000 + 2000;
-    const drift = (Math.random() - 0.5) * 100;
-    
-    particle.animate([
-        { transform: 'translateY(0) translateX(0)', opacity: 0.7 },
-        { transform: `translateY(-${window.innerHeight + 100}px) translateX(${drift}px)`, opacity: 0 }
-    ], {
-        duration: duration,
-        easing: 'ease-out'
-    }).addEventListener('finish', () => {
-        particle.remove();
-    });
-}
-
-// Create particles periodically
-setInterval(createParticle, 300);
-
 // Typewriter effect
 const typewriterText = document.getElementById('typewriter');
 const texts = [
@@ -247,74 +319,38 @@ function typeWriter() {
 // Start typewriter effect after page loads
 setTimeout(typeWriter, 1000);
 
-// Add dynamic gradient background
-const canvas = document.createElement('canvas');
-canvas.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    opacity: 0.3;
-`;
-document.body.appendChild(canvas);
-
-const ctx = canvas.getContext('2d');
-let time = 0;
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+// Add random floating particles
+function createParticle() {
+    const particle = document.createElement('div');
+    particle.style.cssText = `
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        background: var(--accent-color);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.7;
+    `;
+    
+    particle.style.left = Math.random() * window.innerWidth + 'px';
+    particle.style.top = window.innerHeight + 'px';
+    
+    document.body.appendChild(particle);
+    
+    const duration = Math.random() * 3000 + 2000;
+    const drift = (Math.random() - 0.5) * 100;
+    
+    particle.animate([
+        { transform: 'translateY(0) translateX(0)', opacity: 0.7 },
+        { transform: `translateY(-${window.innerHeight + 100}px) translateX(${drift}px)`, opacity: 0 }
+    ], {
+        duration: duration,
+        easing: 'ease-out'
+    }).addEventListener('finish', () => {
+        particle.remove();
+    });
 }
 
-function drawGradient() {
-    const gradient = ctx.createRadialGradient(
-        canvas.width / 2 + Math.sin(time * 0.002) * 100,
-        canvas.height / 2 + Math.cos(time * 0.002) * 100,
-        0,
-        canvas.width / 2,
-        canvas.height / 2,
-        Math.max(canvas.width, canvas.height)
-    );
-    
-    gradient.addColorStop(0, `hsla(${time * 0.1 + 240}, 70%, 50%, 0.1)`);
-    gradient.addColorStop(0.5, `hsla(${time * 0.1 + 270}, 70%, 50%, 0.05)`);
-    gradient.addColorStop(1, 'transparent');
-    
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
-
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawGradient();
-    time++;
-    requestAnimationFrame(animate);
-}
-
-resizeCanvas();
-animate();
-
-window.addEventListener('resize', resizeCanvas);
-
-// Add performance monitoring
-let fps = 0;
-let lastTime = performance.now();
-
-function calculateFPS() {
-    const currentTime = performance.now();
-    fps = Math.round(1000 / (currentTime - lastTime));
-    lastTime = currentTime;
-    
-    // Throttle animations if FPS drops below 30
-    if (fps < 30) {
-        document.body.style.setProperty('--animation-speed', '0.5s');
-    } else {
-        document.body.style.setProperty('--animation-speed', '0.3s');
-    }
-    
-    requestAnimationFrame(calculateFPS);
-}
-
-calculateFPS();
+// Create particles periodically
+setInterval(createParticle, 300);
